@@ -1,0 +1,21 @@
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+**/**/dependency-reduced-pom.xml
+
+# Idea files #
+**/.idea/**
+**/*.iml
+**/target/**
+
+# Eclipse files #
+**/.settings/**
+**/*.classpath
+**/*.project
+
+**/out/**
+

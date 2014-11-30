@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.5"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+
+	<servlet>
+		<servlet-name>SaveUserProfile</servlet-name>
+		<servlet-class>com.google.cloud.training.conference.SaveUserProfile
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SaveUserProfile</servlet-name>
+		<url-pattern>/saveprofile</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>HomePage</servlet-name>
+		<jsp-file>/homepage.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>HomePage</servlet-name>
+		<url-pattern>/homepage</url-pattern>
+	</servlet-mapping>
+
+	<welcome-file-list>
+		<welcome-file>homepage.jsp</welcome-file>
+	</welcome-file-list>
+
+	<servlet>
+		<servlet-name>DeveloperPage</servlet-name>
+		<jsp-file>/developer.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DeveloperPage</servlet-name>
+		<url-pattern>/developer</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ListConferences</servlet-name>
+		<jsp-file>/listconferences.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ListConferences</servlet-name>
+		<url-pattern>/listconferences</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ScheduleConference</servlet-name>
+		<jsp-file>/scheduleconference.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ScheduleConference</servlet-name>
+		<url-pattern>/scheduleconference</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>UserProfilePage</servlet-name>
+		<jsp-file>/userprofile.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UserProfilePage</servlet-name>
+		<url-pattern>/userprofile</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>VenuesPage</servlet-name>
+		<jsp-file>/venues.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>VenuesPage</servlet-name>
+		<url-pattern>/venues</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>SystemServiceServlet</servlet-name>
+		<servlet-class>com.google.api.server.spi.SystemServiceServlet
+		</servlet-class>
+		<init-param>
+			<param-name>services</param-name>
+			<param-value />
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SystemServiceServlet</servlet-name>
+		<url-pattern>/_ah/spi/*</url-pattern>
+	</servlet-mapping>
+</web-app>
