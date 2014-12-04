@@ -85,4 +85,23 @@
 		<servlet-name>SystemServiceServlet</servlet-name>
 		<url-pattern>/_ah/spi/*</url-pattern>
 	</servlet-mapping>
+
+	<security-constraint>
+		<web-resource-collection>
+			<url-pattern>/userprofile</url-pattern>
+			<url-pattern>/scheduleconference</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>*</role-name>
+		</auth-constraint>
+	</security-constraint>
+
+	<security-constraint>
+		<web-resource-collection>
+			<url-pattern>/developer</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>admin</role-name>
+		</auth-constraint>
+	</security-constraint>
 </web-app>

@@ -30,20 +30,40 @@
 
   <%
   	// Get a handle to the UserService
-  	// TODO
+  	UserService userService = UserServiceFactory.getUserService();
 
   	// Get the logged in user
-  	// TODO
+  	Principal userPrincipal = request.getUserPrincipal();
+
+  	String requestUri = request.getRequestURI();
+  	String loginLink = userService.createLoginURL(requestUri);
+  	String logoutLink = userService.createLogoutURL(requestUri);
 
   	// If the user is not logged in, 
   	// display a "login" link, with css style class="nav-item"
-  	// TODO
+	  if (userPrincipal == null) {
+  %>
+	<span="nav-item"> <a href="<%= loginLink %>">Sign In</a></span></p>
+	<%
+		}
+
 
   	// If the user is logged in as an admin, 
   	// display a link to the developer page (/developer)
-  	// TODO 
+  	if (userService.isUserAdmin()) {
+  %>
+	<p><span="nav-item"> <a href="/developer">Developer Page</a></span></p>
+	<%
+		}
 
   	// If the user is logged in, 
   	// display a "sign out" link, with css style class="nav-item"
-  	// TODO
-  %><hr>
+  	if (userPrincipal != null) {
+  	String mainEmail = userPrincipal.getName();
+  %>
+	<p>Hello, <%= mainEmail %></p>
+	<p><span="nav-item"> <a href="<%= logoutLink %>">Sign Out</a></span></p>
+	<%
+		}
+  %>
+<hr>
