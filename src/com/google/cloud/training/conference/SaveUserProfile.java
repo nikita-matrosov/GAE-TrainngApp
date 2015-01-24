@@ -13,11 +13,13 @@ public class SaveUserProfile extends HttpServlet {
     String mainEmail = userPrincipal.getName();
 
     // Get the values submitted by the form
-    // TODO
+    String personName = req.getParameter("personname");
+    String[] topicArray = req.getParameterValues("topics");
+    String notificationEmail = req.getParameter("username");
 
     // Create and save a RegisteredUser entity.
     // Use the RegisteredUser class.
-    // TODO
+    new RegisteredUser(mainEmail, personName, notificationEmail, topicArray);
 
     // Redirect back to the User Profile page
     resp.sendRedirect("/userprofile");

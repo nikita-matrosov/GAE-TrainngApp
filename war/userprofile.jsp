@@ -19,9 +19,9 @@
 <%
     //package com.google.cloud.training.conference;
 
-    // TODO Get the logged in user's email.
+    // Get the logged in user's email.
     // Use userPrincipal, which is defined in header.jsp (which is included)
-    String mainEmail = "username@company.com";  // Get the user's email dynamically
+    String mainEmail = userPrincipal.getName();  // Get the user's email dynamically
     
     // Set the main email as the default notification email address
     String notificationEmail = mainEmail;
@@ -34,13 +34,32 @@
     ArrayList<String> interests = new ArrayList<String>();
     
     %>
-    
-    <h2>Create Your User Profile</h2>
+
+<%
+    // Initialize the heading for the User Profile form
+    String createOrEditHeading = "<h2>Edit Your User Profile</h2>";
+
+// If we already have an entity for the current user
+// get the user's preferences from the entity
+    try {
+        Entity user = RegisteredUser.getUser(mainEmail);
+        personName = (String) user.getProperty("name");
+        notificationEmail = (String) user.getProperty("notificationEmail");
+        interests = (ArrayList<String>) user.getProperty("interests");
+    } catch (EntityNotFoundException e) {
+        createOrEditHeading = "<h2>Create Your User Profile</h2>";
+    }
+%>
+
+<!--  Write the HTML to display the form where users enter their preferences -->
+
+<!--  Write the heading for the User Profile form -->
+<%= createOrEditHeading %>
     
  <!--  Write the HTML to display the form where users enter their preferences -->
         <p><b>Your main email is: </b> <%= mainEmail %> </p> 
-        <!--  TODO set the action of the form -->
-        <form method=post>
+        <!--  set the action of the form -->
+        <form method=post action="/saveprofile">
             <p><b>What is your name?</b></p>
             <input type=text value="<%= personName %>" name=personname size="50"/>
             

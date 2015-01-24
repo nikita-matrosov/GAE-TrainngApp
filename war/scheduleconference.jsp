@@ -6,8 +6,7 @@
 <!--  Display buttons to allow the user to display their calendar in this  page -->
  <%-- include file="getuserscalendar.jsp" --%>
 
-<!--  TODO set the action of the form -->
-<form method=post>
+<form method="post" action="/saveconference">
 
   <p><b>What is the title of your conference? </b><input name="confName" size="30"/></p>
   

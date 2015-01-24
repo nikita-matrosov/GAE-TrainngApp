@@ -124,4 +124,14 @@
         <servlet-name>CalendarAuthCallback</servlet-name>
         <url-pattern>/authcallback</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>SaveConference</servlet-name>
+        <servlet-class>com.google.cloud.training.conference.SaveConference
+        </servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SaveConference</servlet-name>
+        <url-pattern>/saveconference</url-pattern>
+    </servlet-mapping>
 </web-app>

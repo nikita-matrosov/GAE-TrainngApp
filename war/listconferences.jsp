@@ -107,24 +107,25 @@ String displayQueryResults(String tableHeading, PreparedQuery results) {
     // *** Get all conferences, sorted alphabetically ***
     String tableHeading = "<h3>All Conferences Sorted Alphabetically</h3>";
 
-    // Create the Query to get all the conferences TODO 1
-    
-    // Add a sort order to the query to sort by ascending values of confName TODO 1
-
-    // Submit the query TODO 1
-   
-    %>
+    // Create the Query to get all the conferences
+    Query confQuery = new Query("Conference");
+    // Add a sort order to the query to sort by ascending values of confName
+    confQuery.addSort("confName", SortDirection.ASCENDING);
+    // Submit the query
+    PreparedQuery results = datastore.prepare(confQuery);
+%>
     
     <!--  Display the results -->
-    <% PreparedQuery results = null; // Remove this line TODO 1%>
     <%=displayQueryResults(tableHeading, results) %>
         
     <% // *** Show conferences in London ***
     tableHeading = "<h3>All Conferences in London </h3>";
     
-    // Add a filter to your query to filter by city = "London" TODO 2
-    
-    // Submit the query TODO 2
+    // Add a filter to your query to filter by city = "London"
+        Query.Filter cityFilter = new FilterPredicate("city", FilterOperator.EQUAL, "London");
+        confQuery.setFilter(cityFilter);
+        // Submit the query
+        results = datastore.prepare(confQuery);
     %>
     <!--  Display the results -->
     <%=displayQueryResults(tableHeading, results) %>
@@ -132,14 +133,16 @@ String displayQueryResults(String tableHeading, PreparedQuery results) {
      <% // *** Show MEDICAL conferences in London ***
     tableHeading = "<h3>Medical Conferences in London </h3>";
     
-    // Create a filter to your query to filter by topic = "Medical Innovations" TODO 3
+    // Create a filter to your query to filter by topic = "Programming Languages"
+         Query.Filter topicFilter = new FilterPredicate("topic", FilterOperator.EQUAL, "Programming Languages");
    
-    // Create the composite filter TODO 3
-    
-    // Add the composite filter to the query TODO 3
-    
-    // Submit the query TODO 3
-    %>
+    // Create the composite filter
+         Query.Filter comboFilter = CompositeFilterOperator.and(cityFilter, topicFilter);
+    // Add the composite filter to the query
+         confQuery.setFilter(comboFilter);
+         // Submit the query
+         results = datastore.prepare(confQuery);
+     %>
     <!--  Display the results -->
     <%=displayQueryResults(tableHeading, results) %>
    
@@ -148,12 +151,14 @@ String displayQueryResults(String tableHeading, PreparedQuery results) {
     
     // Add a filter to your query to filter for maxAttendees >= 50
     tableHeading = "<h3>All Conferences with More than 50 Attendees</h3>";
-    
-    // Create the filter for maxAttendees TODO 4
-    
-    // Add the filter to the query TODO 4
 
-    // Submit the query TODO 4
+        Query  confSecondQuery = new Query("Conference").addSort("maxAttendees", SortDirection.DESCENDING);
+    // Create the filter for maxAttendees
+        Query.Filter maxAttendeesFilter = new FilterPredicate("maxAttendees", FilterOperator.GREATER_THAN, 50l);
+    // Add the filter to the query
+        confSecondQuery.setFilter(maxAttendeesFilter);
+    // Submit the query
+        results = datastore.prepare(confQuery);
     %>
     <!--  Display the results -->
     <%=displayQueryResults(tableHeading, results) %>
